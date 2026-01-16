@@ -11,10 +11,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
+
+    private final CartRepository cartRepo;
+
+    public List<CartItem> getCart(Long clientId) {
+        return cartRepo.findByClientId(clientId);
+
+    }
+
 
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
@@ -40,5 +49,6 @@ public class CartService {
                 .build();
 
         cartRepository.save(item);
+
     }
 }
