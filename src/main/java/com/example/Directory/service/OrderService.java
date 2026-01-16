@@ -32,7 +32,7 @@ public class OrderService {
             throw new RuntimeException("Корзина пуста");
         }
 
-        CartItem firstItem = items.get(0);
+        CartItem firstItem = items.getFirst();
 
         OrderStatus status = statusRepository.findByName("NEW");
 
