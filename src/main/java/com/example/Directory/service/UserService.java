@@ -7,6 +7,8 @@ import com.example.Directory.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -16,16 +18,15 @@ public class UserService {
     public User register(UserRegisterRequest request) {
 
         if (userRepository.existsByPhone(request.getPhone())) {
-            throw new RuntimeException("Пользователь с таким номером уже существует");
+            throw new RuntimeException("Телефон уже зарегистрирован");
         }
 
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .phone(request.getPhone())
-                .birthDate(request.getBirthDate())
-                .role(Role.USER)
-                .canAddProducts(false)
+                .role(Role.valueOf(request.getRole()))
+                .createdAt(LocalDateTime.now())
                 .build();
 
         return userRepository.save(user);

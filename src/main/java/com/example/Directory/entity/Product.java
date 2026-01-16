@@ -4,19 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
+
 @Table(
-        name = "products",
-        uniqueConstraints = @UniqueConstraint(
-                columnNames = {"name", "owner_id"}
-        )
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "seller_id"})
 )
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Product {
 
     @Id
@@ -28,7 +23,9 @@ public class Product {
     private Integer quantity;
     private boolean available;
 
+    private LocalDateTime createdAt;
+
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @JoinColumn(name = "seller_id")
+    private User seller;
 }

@@ -1,6 +1,7 @@
 package com.example.Directory.entity;
 
 public enum Role {
-    USER,
+    SELLER,
+    CLIENT,
     ADMIN
 }
