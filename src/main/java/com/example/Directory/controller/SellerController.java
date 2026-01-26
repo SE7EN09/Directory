@@ -16,15 +16,15 @@ public class SellerController {
     private final OrderService orderService;
 
     @PostMapping("/{sellerId}/product")
-    public Product addProduct(@PathVariable Long sellerId,
-                              @RequestBody ProductRequest request) {
+    public Product addProduct(@PathVariable Long sellerId, @RequestBody ProductRequest request) {
         return productService.add(sellerId, request);
+
     }
 
     @PutMapping("/product/{productId}")
-    public Product editProduct(@PathVariable Long productId,
-                               @RequestBody ProductRequest request) {
+    public Product editProduct(@PathVariable Long productId, @RequestBody ProductRequest request) {
         return productService.edit(productId, request);
+
     }
 
     @PostMapping("/order/{orderId}/deliver")

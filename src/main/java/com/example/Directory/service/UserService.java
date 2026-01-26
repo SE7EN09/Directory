@@ -19,6 +19,7 @@ public class UserService {
 
         if (userRepository.existsByPhone(request.getPhone())) {
             throw new RuntimeException("Телефон уже зарегистрирован");
+
         }
 
         User user = User.builder()
@@ -28,7 +29,6 @@ public class UserService {
                 .role(Role.valueOf(request.getRole()))
                 .createdAt(LocalDateTime.now())
                 .build();
-
         return userRepository.save(user);
     }
 }

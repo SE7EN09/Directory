@@ -25,26 +25,24 @@ public class OrderService {
     private final OrderStatusRepository statusRepository;
 
     public Order create(Long clientId) {
-
         List<CartItem> items = cartRepository.findByClientId(clientId);
 
         if (items.isEmpty()) {
             throw new RuntimeException("Корзина пуста");
+
         }
 
         CartItem firstItem = items.getFirst();
-
         OrderStatus status = statusRepository.findByName("NEW");
-
         Order order = Order.builder()
                 .client(firstItem.getClient())
                 .seller(firstItem.getProduct().getSeller())
                 .status(status)
                 .createdAt(LocalDateTime.now())
                 .build();
-
         cartRepository.deleteAll(items);
         return orderRepository.save(order);
+
     }
 
     public void cancel(Long orderId) {
@@ -53,6 +51,7 @@ public class OrderService {
 
         order.setStatus(statusRepository.findByName("CANCELED"));
         orderRepository.save(order);
+
     }
 
     public void deliver(Long orderId) {

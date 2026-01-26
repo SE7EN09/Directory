@@ -25,6 +25,7 @@ public class Order {
 
     @ManyToOne
     private OrderStatus status;
+
     @Builder.Default
     private boolean deleted = false;
 

@@ -18,10 +18,8 @@ public class ProductService {
     private final UserRepository userRepository;
 
     public Product add(Long sellerId, ProductRequest request) {
-
         User seller = userRepository.findById(sellerId)
                 .orElseThrow(() -> new RuntimeException("Продавец не найден"));
-
         Product product = Product.builder()
                 .name(request.getName())
                 .price(request.getPrice())
@@ -30,19 +28,16 @@ public class ProductService {
                 .seller(seller)
                 .createdAt(LocalDateTime.now())
                 .build();
-
         return productRepository.save(product);
+
     }
 
     public Product edit(Long productId, ProductRequest request) {
-
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Товар не найден"));
-
         product.setName(request.getName());
         product.setPrice(request.getPrice());
         product.setQuantity(request.getQuantity());
-
         return productRepository.save(product);
     }
 }

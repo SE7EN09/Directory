@@ -24,7 +24,6 @@ public class CartService {
 
     }
 
-
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
@@ -39,6 +38,7 @@ public class CartService {
 
         if (!product.isAvailable() || product.getQuantity() < request.getQuantity()) {
             throw new RuntimeException("Недостаточно товара");
+
         }
 
         CartItem item = CartItem.builder()
@@ -47,8 +47,6 @@ public class CartService {
                 .quantity(request.getQuantity())
                 .createdAt(LocalDateTime.now())
                 .build();
-
         cartRepository.save(item);
-
     }
 }

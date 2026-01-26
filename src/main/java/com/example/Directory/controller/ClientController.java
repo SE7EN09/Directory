@@ -21,20 +21,19 @@ public class ClientController {
 
     }
 
-
-
     private final CartService cartService;
     private final OrderService orderService;
 
     @PostMapping("/{clientId}/cart")
-    public void addToCart(@PathVariable Long clientId,
-                          @RequestBody CartRequest request) {
+    public void addToCart(@PathVariable Long clientId, @RequestBody CartRequest request) {
         cartService.add(clientId, request);
+
     }
 
     @PostMapping("/{clientId}/order")
     public Order createOrder(@PathVariable Long clientId) {
         return orderService.create(clientId);
+
     }
 
     @PostMapping("/order/{orderId}/cancel")

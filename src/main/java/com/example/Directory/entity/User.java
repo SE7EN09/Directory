@@ -7,13 +7,17 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "phone"))
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
     private String lastName;
 
@@ -22,9 +26,6 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
     private LocalDateTime createdAt;
-
     private boolean canAddProducts;
-
 }
