@@ -15,17 +15,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
 
+    private final CartService cartService;
+    private final OrderService orderService;
+
     @GetMapping("/{id}/cart")
-    public List<CartItem> cart(@PathVariable Long id) {
+    public List<CartItem> getCart(@PathVariable Long id) {
         return cartService.getCart(id);
 
     }
 
-    private final CartService cartService;
-    private final OrderService orderService;
-
     @PostMapping("/{clientId}/cart")
-    public void addToCart(@PathVariable Long clientId, @RequestBody CartRequest request) {
+    public void addToCart(@PathVariable Long clientId,
+                          @RequestBody CartRequest request) {
         cartService.add(clientId, request);
 
     }
@@ -39,5 +40,6 @@ public class ClientController {
     @PostMapping("/order/{orderId}/cancel")
     public void cancel(@PathVariable Long orderId) {
         orderService.cancel(orderId);
+
     }
 }

@@ -1,7 +1,6 @@
 package com.example.Directory.controller;
 
-import com.example.Directory.entity.User;
-import com.example.Directory.repository.UserRepository;
+import com.example.Directory.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +9,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final UserRepository userRepository;
+    private final AdminService adminService;
 
     @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+        adminService.deleteUser(id);
+
     }
 
     @PostMapping("/allow-products/{id}")
     public void allowProducts(@PathVariable Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
-        user.setCanAddProducts(true);
-        userRepository.save(user);
+        adminService.allowProducts(id);
+
     }
 }

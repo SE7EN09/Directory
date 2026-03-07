@@ -28,6 +28,11 @@ public class CartService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
+    public void remove(Long cartItemId) {
+        cartRepository.deleteById(cartItemId);
+
+    }
+
     public void add(Long clientId, CartRequest request) {
 
         User client = userRepository.findById(clientId)
@@ -48,5 +53,6 @@ public class CartService {
                 .createdAt(LocalDateTime.now())
                 .build();
         cartRepository.save(item);
+
     }
 }

@@ -10,6 +10,7 @@ import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,6 @@ public class OrderService {
 
         if (items.isEmpty()) {
             throw new RuntimeException("Корзина пуста");
-
         }
 
         CartItem firstItem = items.getFirst();
@@ -54,11 +54,23 @@ public class OrderService {
 
     }
 
+    public void softDelete(Long orderId) {
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Заказ не найден"));
+
+        order.setDeleted(true);
+        orderRepository.save(order);
+
+    }
+
+
     public void deliver(Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Заказ не найден"));
 
         order.setStatus(statusRepository.findByName("DELIVERED"));
         orderRepository.save(order);
+
     }
 }

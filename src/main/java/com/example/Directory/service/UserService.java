@@ -30,5 +30,6 @@ public class UserService {
                 .createdAt(LocalDateTime.now())
                 .build();
         return userRepository.save(user);
+
     }
 }
