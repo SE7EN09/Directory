@@ -1,26 +1,27 @@
-package com.example.Directory.service;
+package com.example.directory.service;
 
-import com.example.Directory.entity.User;
-import com.example.Directory.repository.UserRepository;
+import com.example.directory.entity.User;
+import com.example.directory.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AdminService {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+  public void deleteUser(Long id) {
+    userRepository.deleteById(id);
+  }
 
-    }
+  public void allowProducts(Authentication authentication) {
+    String phone = authentication.getName();
+    User user =
+        userRepository.findByPhone(phone).orElseThrow(() -> new RuntimeException("User not found"));
 
-    public void allowProducts(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
-        user.setCanAddProducts(true);
-        userRepository.save(user);
-
-    }
+    user.setCanAddProducts(true);
+    userRepository.save(user);
+  }
 }

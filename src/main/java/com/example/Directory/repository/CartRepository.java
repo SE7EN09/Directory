@@ -1,10 +1,9 @@
-package com.example.Directory.repository;
+package com.example.directory.repository;
 
-import com.example.Directory.entity.CartItem;
+import com.example.directory.entity.CartItem;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 public interface CartRepository extends JpaRepository<CartItem, Long> {
-    List<CartItem> findByClientId(Long clientId);
+  List<CartItem> findByClientId(Long clientId);
 }

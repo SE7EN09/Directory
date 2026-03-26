@@ -1,15 +1,14 @@
-package com.example.Directory.dto;
-
-import lombok.Getter;
-import lombok.Setter;
+package com.example.directory.dto;
 
 import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 public class ProductRequest {
-    private String name;
-    private BigDecimal price;
-    private Integer quantity;
-    private boolean available;
+  private String name;
+  private BigDecimal price;
+  private Integer quantity;
+  private boolean available;
 }

@@ -1,7 +1,6 @@
-package com.example.Directory.repository;
+package com.example.directory.repository;
 
-import com.example.Directory.entity.Order;
+import com.example.directory.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
-}
+public interface OrderRepository extends JpaRepository<Order, Long> {}

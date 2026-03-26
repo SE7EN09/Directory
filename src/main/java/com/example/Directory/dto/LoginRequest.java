@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CartRequest {
-  private Long productId;
-  private Integer quantity;
+public class LoginRequest {
+
+  private String phone;
+  private String password;
 }
