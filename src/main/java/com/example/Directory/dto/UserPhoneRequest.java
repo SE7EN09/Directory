@@ -1,0 +1,10 @@
+package com.example.directory.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class UserPhoneRequest {
+  private String phone;
+}

@@ -6,6 +6,7 @@ import com.example.directory.entity.User;
 import com.example.directory.repository.ProductRepository;
 import com.example.directory.repository.UserRepository;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +19,17 @@ public class ProductService {
   private final ProductRepository productRepository;
   private final UserRepository userRepository;
 
+  public List<Product> getAvailableProducts() {
+    return productRepository.findByAvailableTrue();
+  }
+
   public Product add(ProductRequest request) {
     User seller = getCurrentUser();
+
+    if (!seller.isCanAddProducts()) {
+      throw new RuntimeException("Seller is not allowed to add products");
+    }
+
     Product product =
         Product.builder()
             .name(request.getName())

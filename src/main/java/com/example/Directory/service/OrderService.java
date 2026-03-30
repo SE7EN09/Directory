@@ -62,7 +62,6 @@ public class OrderService {
   }
 
   public void softDelete(Long orderId) {
-
     Order order =
         orderRepository
             .findById(orderId)
